@@ -5,14 +5,15 @@ import pygame
 def main():
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Physics Simulator")
     font = pygame.font.SysFont(None, 30)
-    fps = 120
+    clock = pygame.time.Clock()
 
-    circle = Properties(GROUND, X, Y, MASS, ACCELERATION, VELOCITY, DELTA_TIME, APPLY_FORCE, GROUND_ABSORPTION, WIND_RESISTANCE)
+    circle = Properties(GROUND, X, Y, MASS, ACCELERATION, VELOCITY, APPLY_FORCE, GROUND_ABSORPTION, WIND_RESISTANCE)
 
     run = True
     while run:
+        dt = clock.tick(60) / 1000.0
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -23,7 +24,7 @@ def main():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
                 circle.apply_downward_force()
 
-        circle.advance()
+        circle.advance(dt)
 
         win.fill((219, 252, 255))
         pygame.draw.circle(win, (255, 100, 100), (int(circle.x), int(circle.y)), 50)
@@ -36,9 +37,9 @@ def main():
         win.blit(vel_text, (10, 35))
 
         pygame.display.flip()
-        pygame.time.Clock().tick(fps)
-
-    pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        pygame.quit()
