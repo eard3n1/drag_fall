@@ -27,7 +27,7 @@ class Properties:
         drag_acceleration = (-self.wind_resistance * self.velocity * abs(self.velocity)) / self.mass
         self.velocity += drag_acceleration * dt # wind resistance
 
-        self.y += self.velocity * dt * 60
+        self.y += self.velocity * dt * 100
 
         if self.y >= self.ground:
             self.y = self.ground

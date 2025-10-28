@@ -30,10 +30,10 @@ def main():
         pygame.draw.circle(win, (255, 100, 100), (int(circle.x), int(circle.y)), 50)
         pygame.draw.line(win, (100, 100, 100), (0, GROUND + 50), (WIDTH, GROUND + 50), 10)
 
-        altitude = font.render(f"Altitude: {round(abs(circle.y - GROUND))} px", True, (255, 255, 255), (0, 0, 0))
+        altitude = font.render(f"Altitude: {round((abs(circle.y - GROUND))/100)} m", True, (255, 255, 255), (0, 0, 0))
         win.blit(altitude, (10, 10))
 
-        vel_text = font.render(f"Velocity: {round(abs(circle.velocity))} px/s", True, (255, 255, 255), (0, 0, 0))
+        vel_text = font.render(f"Velocity: {round(abs(circle.velocity))} m/s", True, (255, 255, 255), (0, 0, 0))
         win.blit(vel_text, (10, 35))
 
         pygame.display.flip()
